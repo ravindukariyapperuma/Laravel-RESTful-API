@@ -26,7 +26,11 @@ class CountryController extends Controller
         return response()->json($country, 201);
     }
 
-    public function countryUpdate(Request $request, CountryModel $country){
+    public function countryUpdate(Request $request, $id){
+        $country = CountryModel::find($id);
+        if(is_null($country)){
+            return response()->json('Record not found!', 404);
+        }
         $country->update($request->all());
         return response()->json($country, 200);
     }
