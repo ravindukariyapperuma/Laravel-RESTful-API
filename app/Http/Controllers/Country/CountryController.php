@@ -36,6 +36,10 @@ class CountryController extends Controller
     }
 
     public function countryDelete(Request $request, CountryModel $country){
+        $country = CountryModel::find($id);
+        if(is_null($country)){
+            return response()->json('Record not found!', 404);
+        }
         $country->delete();
         return response()->json(null, 204);
     }
